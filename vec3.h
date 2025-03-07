@@ -9,6 +9,7 @@ public:
     vec3() {}
     vec3(double _v1, double _v2, double _v3) : v{_v1, _v2, _v3} {}
     vec3(vec3 &_rhs) : v{_rhs[0], _rhs[1], _rhs[2]} {}
+    vec3(const vec3 &_rhs) : v{_rhs[0], _rhs[1], _rhs[2]} {}
 
     // getters
     double &x();
@@ -47,8 +48,8 @@ public:
 
     // Vector operations
 
-    double length() const;
-    double length_squared() const;
+    double length();
+    double length_squared();
 
 private:
     double v[3];
@@ -56,7 +57,7 @@ private:
 
 double dot(const vec3 &u, const vec3 &v);
 vec3 cross(const vec3 &u, const vec3 &v);
-vec3 unit_vector(const vec3 &v);
+vec3 unit_vector(vec3 &v);
 
 std::ostream &operator<<(std::ostream &os, const vec3 &vector3);
 

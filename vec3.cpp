@@ -154,11 +154,11 @@ vec3 &vec3::operator/=(const double d) {
     return *this;
 }
 
-double vec3::length() const {
+double vec3::length() {
     return sqrt(this->length_squared());
 }
 
-double vec3::length_squared() const {
+double vec3::length_squared() {
     return (this->v[0] * this->v[0]) + (this->v[1] * this->v[1]) + (this->v[2] * this->v[2]);
 }
 
@@ -175,8 +175,8 @@ vec3 cross(const vec3 &u, const vec3 &v) {
 }
 
 vec3 unit_vector(vec3 &v) {
-    const double len = v.length();
-    return v / len;
+    // const double len = v.length();
+    return v / v.length();
 }
 
 std::ostream &operator<<(std::ostream &os, const vec3 &v) {

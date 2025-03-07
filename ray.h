@@ -10,20 +10,17 @@ public:
         orig = {0, 0, 0};
         dir = {0, 0, 0};
     }
-    ray(const point3 &_origin, const vec3 &_direction) : orig(_origin), dir(_direction) {}
+    ray(const vec3 &_origin, const vec3 &_direction) : orig(_origin), dir(_direction) {}
 
     // Getters
-    const point3 &origin() const { return orig; }
-    const vec3 &direction() const { return dir; }
+    const vec3 &origin() const;
+    const vec3 &direction() const;
 
     // Return the value of a ray
-    point3 at(double t) const {
-        return orig + (dir * t);
-    }
+    vec3 at(double t);
 
 private:
-    point3 orig;
+    vec3 orig;
     vec3 dir;
 };
-
 #endif
