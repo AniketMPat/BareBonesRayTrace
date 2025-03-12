@@ -5,22 +5,15 @@
 
 class ray {
 public:
-    // Constructors
-    ray() {
-        orig = {0, 0, 0};
-        dir = {0, 0, 0};
-    }
-    ray(const vec3 &_origin, const vec3 &_direction) : orig(_origin), dir(_direction) {}
+    ray() {}
+    ray(vec3 &_origin, vec3 &_direction) : origin(_origin), direction(_direction) {}
 
-    // Getters
-    const vec3 &origin() const;
-    const vec3 &direction() const;
-
-    // Return the value of a ray
-    vec3 at(double t);
+    vec3 getOrigin();
+    vec3 getDirection();
+    vec3 rayAt(double t);
 
 private:
-    vec3 orig;
-    vec3 dir;
+    vec3 origin, direction;
 };
+
 #endif
