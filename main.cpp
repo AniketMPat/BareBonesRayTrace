@@ -4,7 +4,7 @@
 #include <iostream>
 
 double hit_sphere(const vec3 &center, double radius, ray &r) {
-    vec3 oc = center - r.getOrigin();
+    vec3 oc = center - r.getOrigin(); // Ray from camera to sphere center P - C
     auto a = dot(r.getDirection(), r.getDirection());
     auto h = dot(r.getDirection(), oc);
     auto c = oc.length_squared() - (radius * radius);
