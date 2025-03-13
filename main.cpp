@@ -3,18 +3,29 @@
 #include "vec3.h"
 #include <iostream>
 
-bool hit_sphere(const vec3 &center, double radius, ray &r) {
+double hit_sphere(const vec3 &center, double radius, ray &r) {
     vec3 oc = center - r.getOrigin();
     auto a = dot(r.getDirection(), r.getDirection());
-    auto b = -2.0 * dot(r.getDirection(), oc);
-    auto c = dot(oc, oc) - radius * radius;
-    auto discriminant = b * b - 4 * a * c;
-    return (discriminant >= 0);
+    auto h = dot(r.getDirection(), oc);
+    auto c = oc.length_squared() - (radius * radius);
+    auto discriminant = h * h - 4 * a * c;
+
+    // if b2 - 4ac < 0 then return full quadratic
+    if (discriminant < 0) {
+        return -1.0;
+    } else {
+        return (-h - sqrt(discriminant)) / (2.0 * a);
+    }
 }
 
 colour ray_colour(ray &r) {
-    if (hit_sphere(vec3(0, 0, -1), 0.5, r)) {
-        return colour(1, 0, 0);
+    auto t = hit_sphere(vec3(0, 0, -1), 0.5, r);
+
+    // if sphere hit, normalizedVec = hitVector - sphere center
+    // and colour by norm values
+    if (t > 0) {
+        vec3 N = unit_vector(r.rayAt(t) - vec3(0, 0, -1));
+        return 0.5 * colour(N.x() + 1, N.y() + 1, N.z() + 1);
     }
 
     vec3 unit_direction = unit_vector(r.getDirection());
@@ -65,7 +76,7 @@ int main() {
             ray r(camera_center, ray_direction);
 
             colour pixel_colour = ray_colour(r);
-            write_colour(std::cout, pixel_colour);
+            writeColour(std::cout, pixel_colour);
         }
     }
 
