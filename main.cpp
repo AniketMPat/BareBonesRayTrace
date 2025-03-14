@@ -1,7 +1,4 @@
-#include "colour.h"
-#include "ray.h"
-#include "vec3.h"
-#include <iostream>
+#include "rtweekend.h"
 
 double hit_sphere(const vec3 &center, double radius, ray &r) {
     vec3 oc = center - r.getOrigin(); // Ray from camera to sphere center P - C

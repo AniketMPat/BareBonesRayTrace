@@ -3,13 +3,13 @@
 
 #include "hittable.h"
 #include "ray.h"
-#include "vec3.h"
+#include "rtweekend.h"
 
 class sphere : public hittable {
 public:
     sphere(vec3 &_center, double &_radius, ray &r) : center{_center}, radius{_radius} {}
 
-    double hit_sphere(ray &r, double tMin, double tMax, hitRecord &record) {
+    double hit(ray &r, double tMin, double tMax, hitRecord &record) {
 
         vec3 oc = center - r.getOrigin(); // Ray from camera to sphere center P - C
         auto a = dot(r.getDirection(), r.getDirection());
