@@ -7,38 +7,31 @@
 
 class sphere : public hittable {
 public:
-    sphere(vec3 &_center, double &_radius, ray &r) : center{_center}, radius{_radius} {}
+    sphere(const vec3 &center, double radius) : center(center), radius(std::fmax(0, radius)) {}
 
-    double hit(ray &r, double tMin, double tMax, hitRecord &record) {
-
-        vec3 oc = center - r.getOrigin(); // Ray from camera to sphere center P - C
-        auto a = dot(r.getDirection(), r.getDirection());
+    bool hit(ray &r, double ray_tmin, double ray_tmax, hitRecord &rec) const override {
+        vec3 oc = center - r.getOrigin();
+        auto a = r.getDirection().length_squared();
         auto h = dot(r.getDirection(), oc);
-        auto c = oc.length_squared() - (radius * radius);
-        auto discriminant = (h * h) - (4 * a * c);
+        auto c = oc.length_squared() - radius * radius;
 
-        // if b2 - 4ac < 0 then return full quadratic
-        if (discriminant < 0) {
+        auto discriminant = h * h - a * c;
+        if (discriminant < 0)
             return false;
-        }
 
-        // Find nearest root that lies in hittable range
-        // try h-sqrt(disc)/a
-        auto root = h - (sqrt(discriminant) / a);
-        if (root <= tMin || root >= tMin) {
-            // try h+sqrt(disc)/a
-            root = h + (sqrt(discriminant) / a);
-            // if both roots of quadratic fall out of hittable interval return no hit
-            if (root <= tMin || root >= tMax) {
+        auto sqrtd = std::sqrt(discriminant);
+
+        // Find the nearest root that lies in the acceptable range.
+        auto root = (h - sqrtd) / a;
+        if (root <= ray_tmin || ray_tmax <= root) {
+            root = (h + sqrtd) / a;
+            if (root <= ray_tmin || ray_tmax <= root)
                 return false;
-            }
         }
 
-        // Set the values of the hit record and return hit
-        record.t = root;
-        record.point = r.rayAt(record.t);
-        vec3 outwardNormal = (record.point - center) / radius;
-        record.setFaceNormal(r, outwardNormal);
+        rec.t = root;
+        rec.point = r.rayAt(rec.t);
+        rec.pointNormal = (rec.point - center) / radius;
 
         return true;
     }
