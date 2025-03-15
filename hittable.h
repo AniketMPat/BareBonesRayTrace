@@ -27,7 +27,6 @@ public:
     // more explained here: https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors
     virtual ~hittable() = default;
 
-    // virtual bool hit(ray &r, double tMin, double tMax, hitRecord &record) const = 0;
     virtual bool hit(ray &r, interval ray_t, hitRecord &rec) const = 0;
 };
 
