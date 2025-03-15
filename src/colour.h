@@ -1,13 +1,15 @@
 #ifndef COLOR_H
 #define COLOR_H
 
+#include "rtweekend.h"
 #include "vec3.h"
 
-#include <iostream>
+// type alias for vec3 to colour
+// x,y,z represents rgb values
+using Colour = Vec3;
 
-using colour = vec3;
-
-inline void write_color(std::ostream &out, const colour &pixel_color) {
+inline void writeColor(std::ostream &out, const Colour &pixel_color) {
+    // Assign input colour to rgb
     auto r = pixel_color.x();
     auto g = pixel_color.y();
     auto b = pixel_color.z();

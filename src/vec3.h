@@ -3,13 +3,13 @@
 
 #include "rtweekend.h"
 
-class vec3 {
+class Vec3 {
 public:
     // Default 0 and parameterized ructors
-    vec3() : v{0, 0, 0} {}
-    vec3(double _v1, double _v2, double _v3) : v{_v1, _v2, _v3} {}
-    vec3(const vec3 &_rhs) : v{_rhs.v[0], _rhs.v[1], _rhs.v[2]} {}
-    vec3(vec3 &_rhs) : v{_rhs.v[0], _rhs.v[1], _rhs.v[2]} {}
+    Vec3() : v{0, 0, 0} {}
+    Vec3(double _v1, double _v2, double _v3) : v{_v1, _v2, _v3} {}
+    Vec3(const Vec3 &_rhs) : v{_rhs.v[0], _rhs.v[1], _rhs.v[2]} {}
+    Vec3(Vec3 &_rhs) : v{_rhs.v[0], _rhs.v[1], _rhs.v[2]} {}
 
     // getters
     double x() const;
@@ -20,50 +20,50 @@ public:
     double operator[](int i) const { return v[i]; }
 
     // Turn vec elems negative
-    vec3 operator-();
+    Vec3 operator-();
 
-    vec3 &operator+=(vec3 &rhs);
-    vec3 &operator-=(vec3 &rhs);
-    vec3 &operator+=(double d);
-    vec3 &operator-=(double d);
-    vec3 &operator*=(double d);
-    vec3 &operator/=(double d);
+    Vec3 &operator+=(Vec3 &rhs);
+    Vec3 &operator-=(Vec3 &rhs);
+    Vec3 &operator+=(double d);
+    Vec3 &operator-=(double d);
+    Vec3 &operator*=(double d);
+    Vec3 &operator/=(double d);
 
     double length() const;
     double length_squared() const;
 
     bool near_zero() const;
 
-    static vec3 random();
-    static vec3 random(double min, double max);
+    static Vec3 random();
+    static Vec3 random(double min, double max);
 
 private:
     double v[3];
 };
 
 // Binary operations with vectors and doubles
-vec3 operator+(const vec3 &_u, const vec3 &_v);
-vec3 operator+(const vec3 &_v, double d);
-vec3 operator+(double d, const vec3 &_v);
+Vec3 operator+(const Vec3 &_u, const Vec3 &_v);
+Vec3 operator+(const Vec3 &_v, double d);
+Vec3 operator+(double d, const Vec3 &_v);
 
-vec3 operator-(const vec3 _u, const vec3 _v);
-vec3 operator-(const vec3 &_v, double d);
-vec3 operator-(double d, const vec3 &_v);
+Vec3 operator-(const Vec3 _u, const Vec3 _v);
+Vec3 operator-(const Vec3 &_v, double d);
+Vec3 operator-(double d, const Vec3 &_v);
 
-vec3 operator*(const vec3 &u, const vec3 &v);
-vec3 operator*(const vec3 &_v, double d);
-vec3 operator*(double d, const vec3 &_v);
+Vec3 operator*(const Vec3 &u, const Vec3 &v);
+Vec3 operator*(const Vec3 &_v, double d);
+Vec3 operator*(double d, const Vec3 &_v);
 
-vec3 operator/(const vec3 &_v, double d);
+Vec3 operator/(const Vec3 &_v, double d);
 
-double dot(const vec3 &_u, const vec3 &_v);
-vec3 cross(const vec3 &_u, const vec3 &_v);
-vec3 unit_vector(const vec3 &_v);
-vec3 random_unit_vector();
-vec3 random_on_hemisphere(const vec3 &normal);
-vec3 reflect(const vec3 &v, const vec3 &n);
+double dot(const Vec3 &_u, const Vec3 &_v);
+Vec3 cross(const Vec3 &_u, const Vec3 &_v);
+Vec3 unit_vector(const Vec3 &_v);
+Vec3 random_unit_vector();
+Vec3 random_on_hemisphere(const Vec3 &normal);
+Vec3 reflect(const Vec3 &v, const Vec3 &n);
 
 // display
-std::ostream &operator<<(std::ostream &os, const vec3 &vector3);
+std::ostream &operator<<(std::ostream &os, const Vec3 &vector3);
 
 #endif
