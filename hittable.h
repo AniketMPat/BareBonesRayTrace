@@ -5,6 +5,13 @@
 #include "ray.h"
 #include "interval.h"
 
+/*
+Class to record vector values of where ray hits an object
+point: vector where ray has collided with object
+pointNormal: The normal vector for hit object and incoming ray
+t: parameterized t for ray eqn, point = rayOrigin + t*rayDirection
+frontFace: weather we want normal vector to face outwards form object or inwards
+*/
 class hitRecord {
 public:
     vec3 point;
@@ -21,6 +28,9 @@ public:
     }
 };
 
+/*
+Class to classify an object that can be hit by rays
+*/
 class hittable {
 public:
     // using a virtual destructor for a base class that will be derived

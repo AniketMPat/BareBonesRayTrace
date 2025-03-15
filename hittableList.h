@@ -3,6 +3,11 @@
 
 #include "hittable.h"
 
+/*
+hittableList class extends hittable
+
+objects: vector of shared pointers of type hittable
+*/
 class hittableList : public hittable {
 public:
     std::vector<std::shared_ptr<hittable>> objects;
