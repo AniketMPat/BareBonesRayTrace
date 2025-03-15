@@ -1,4 +1,5 @@
 #include "vec3.h"
+#include "rtweekend.h"
 
 double &vec3::x() { return this->v[0]; }
 double &vec3::y() { return this->v[1]; }
@@ -52,6 +53,14 @@ double vec3::length_squared() const {
     return (this->v[0] * this->v[0]) + (this->v[1] * this->v[1]) + (this->v[2] * this->v[2]);
 }
 
+vec3 vec3::random() {
+    return vec3(random_double(), random_double(), random_double());
+}
+
+vec3 vec3::random(double min, double max) {
+    return vec3(random_double(min, max), random_double(min, max), random_double(min, max));
+}
+
 vec3 operator+(const vec3 &_u, const vec3 &_v) {
     return vec3(_u[0] + _v[0], _u[1] + _v[1], _u[2] + _v[2]);
 }
@@ -94,7 +103,22 @@ vec3 cross(const vec3 &_u, const vec3 &_v) {
 vec3 unit_vector(const vec3 &_v) {
     return _v / _v.length();
 }
-
+vec3 random_unit_vector() {
+    while (true) {
+        auto p = vec3::random(-1, 1);
+        auto lensq = p.length_squared();
+        if (1e-160 < lensq && lensq <= 1) {
+            return p / sqrt(lensq);
+        }
+    }
+}
+vec3 random_on_hemisphere(const vec3 &normal) {
+    vec3 on_unit_sphere = random_unit_vector();
+    if (dot(on_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
+        return on_unit_sphere;
+    else
+        return -on_unit_sphere;
+}
 std::ostream &operator<<(std::ostream &os, const vec3 &_v) {
     return os << _v[0] << " " << _v[1] << " " << _v[2] << "\n";
 }

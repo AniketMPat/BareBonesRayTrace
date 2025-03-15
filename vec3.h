@@ -32,6 +32,9 @@ public:
     double length() const;
     double length_squared() const;
 
+    static vec3 random();
+    static vec3 random(double min, double max);
+
 private:
     double v[3];
 };
@@ -53,6 +56,8 @@ vec3 operator/(const vec3 &_v, double d);
 double dot(const vec3 &_u, const vec3 &_v);
 vec3 cross(const vec3 &_u, const vec3 &_v);
 vec3 unit_vector(const vec3 &_v);
+vec3 random_unit_vector();
+vec3 random_on_hemisphere(const vec3 &normal);
 
 // display
 std::ostream &operator<<(std::ostream &os, const vec3 &vector3);
