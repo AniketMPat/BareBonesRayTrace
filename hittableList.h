@@ -2,8 +2,6 @@
 #define HITTABLELIST_H
 
 #include "hittable.h"
-#include "rtweekend.h"
-#include <vector>
 
 class hittableList : public hittable {
 public:

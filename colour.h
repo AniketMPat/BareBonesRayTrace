@@ -1,7 +1,6 @@
 #ifndef colour_H
 #define colour_H
 
-#include "rtweekend.h"
 #include "vec3.h"
 
 using colour = vec3;

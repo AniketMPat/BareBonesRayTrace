@@ -1,8 +1,8 @@
 #ifndef HITTABLE_H
 #define HITTABLE_H
 
-#include "rtweekend.h"
 #include "vec3.h"
+#include "ray.h"
 
 class hitRecord {
 public:
