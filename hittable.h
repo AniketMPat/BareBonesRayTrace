@@ -5,6 +5,9 @@
 #include "ray.h"
 #include "interval.h"
 
+// let compiler know that material class will be defined later when this file is included in material.h
+class material;
+
 /*
 Class to record vector values of where ray hits an object
 point: vector where ray has collided with object
@@ -16,6 +19,7 @@ class hitRecord {
 public:
     vec3 point;
     vec3 pointNormal;
+    shared_ptr<material> hitMaterial;
     double t;
     bool frontFace;
 
