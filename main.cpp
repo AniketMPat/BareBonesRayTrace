@@ -5,10 +5,11 @@
 #include "sphere.h"
 #include "hittable.h"
 #include "hittableList.h"
+#include "interval.h"
 
 colour ray_color(ray &r, const hittable &world) {
     hitRecord rec;
-    if (world.hit(r, 0, infinity, rec)) {
+    if (world.hit(r, interval(0, infinity), rec)) {
         return 0.5 * (rec.pointNormal + colour(1, 1, 1));
     }
 
